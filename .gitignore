@@ -1,5 +1,4 @@
 # Ignorar arquivos CSV e XLSX
-*.zip
 *.rar
 *.parquet
 /Dados/Databases
