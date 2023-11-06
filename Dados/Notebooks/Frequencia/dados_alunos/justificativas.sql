@@ -79,7 +79,7 @@ INSERT INTO tb_sub_justificativa (co_sub_justificativa, id_sub_justificativa, no
     (45,'16i', 'Estudantes com deficiência, transtornos globais do desenvolvimento e altas habilidades ou superdotação sem apoio/estimulação para permanecer na escola',16),
     (46,'16j', 'A escola não possui tradutor e intérprete de Libras para estudantes surdos',16),
     (47,'17a', 'Envolvimento com drogas',17),
-    (48,'18a', 'Envolvimento em atos infracionais',17),
+    (48,'18a', 'Envolvimento em atos infracionais',18),
     (49,'19a', 'Violência Intrafamiliar',19),
     (50,'20a', 'Greve',20),
     (51,'20b', 'Calamidade pública que atingiu a escola ou exigiu o uso do espaço como abrigamento',20),

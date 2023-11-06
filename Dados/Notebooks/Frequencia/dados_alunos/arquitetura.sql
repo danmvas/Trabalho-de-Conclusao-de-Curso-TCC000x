@@ -5,14 +5,15 @@ CREATE TABLE tb_instituicao (
 
 CREATE TABLE tb_professor (
     co_professor INTEGER PRIMARY KEY ,
-    no_professor VARCHAR(150) NOT NULL
+    no_professor VARCHAR(150) NOT NULL,
+    co_instituicao INTEGER NOT NULL REFERENCES tb_instituicao(co_instituicao),
 );
 
 CREATE TABLE tb_aluno (
     co_aluno INTEGER PRIMARY KEY ,
     no_aluno VARCHAR(150) NOT NULL,
     dt_nascimento DATE NOT NULL,
-    co_instituicao INTEGER NOT NULL
+    co_instituicao INTEGER NOT NULL REFERENCES tb_instituicao(co_instituicao),
 );
 
 CREATE TABLE tb_turno (
