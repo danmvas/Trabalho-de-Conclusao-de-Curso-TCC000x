@@ -1,0 +1,79 @@
+\chapter{Trabalhos Relacionados}
+
+
+
+Após uma busca pela literatura, foi encontrado o artigo de \citeonline{Lee2019}, intitulado \textit{``The Machine Learning-Based Dropout Early Warning System for Improving the Performance of Dropout Prediction''}. Este artigo tem como objetivo abordar a questão da previsão de evasão escolar usando técnicas de aprendizado de máquina, propondo o uso de métodos SMOTE e ensemble para lidar com esse problema. O SMOTE é uma técnica de \textit{oversampling} que gera novos exemplos sintéticos da classe minoritária (no caso do artigo, alunos em risco de evasão escolar), enquanto o ensemble combina vários classificadores para melhorar o desempenho geral. 
+
+Os autores usaram dados do banco de dados do \textit{National Education Information System} (NEIS) para treinar e avaliar seus modelos de previsão. Eles incluíram os principais indicadores de risco recomendados para a predição da evasão escolar pelo National High School Center para a previsão de evasão escolar em sua análise, que foram a frequência de presença, comportamento e desempenho do curso (referidos como ``ABCs'': \textit{attendance}, \textit{behavior}, e \textit{course performance}). Para além desses, os autores, não tiveram acesso a muitos outros recursos, como a avaliação dos professores sobre os alunos.
+
+Os autores testaram vários métodos de aprendizado de máquina para prever a evasão escolar, incluindo árvores de decisão, redes neurais, Support Vector Machine (SVM), Random Forest e Gradient Boosting Decision Tree (BDT). Para avaliar o desempenho dos modelos, os autores usaram curvas ROC e PR. As curvas ROC são usadas para avaliar a sensibilidade e especificidade do modelo em diferentes pontos de corte, enquanto as curvas PR são mais informativas quando há um desequilíbrio de classe. Apesar dessas limitações, os resultados mostram que o modelo BDT teve o melhor desempenho na previsão de alunos em risco de evasão escolar. De acordo com as curvas PR, o modelo BDT teve o melhor desempenho \cite{Lee2019}.
+
+Já o trabalho de \citeonline{queiroga2020learning} apresenta um estudo de caso sobre o uso de análise de dados para identificar alunos em risco de evasão em um curso técnico de educação a distância. O objetivo do estudo foi desenvolver um modelo preditivo que pudesse identificar alunos em risco de evasão com antecedência, permitindo que a instituição de ensino tomasse medidas preventivas para ajudar esses alunos a permanecerem no curso. Para alcançar esse objetivo, os pesquisadores utilizaram técnicas de aprendizado de máquina, como algoritmos de classificação e regressão, para analisar dados de desempenho acadêmico, interações dos alunos com o ambiente virtual de aprendizagem e informações demográficas. Além disso, foram utilizadas técnicas de mineração de dados e análise exploratória de dados para identificar padrões e tendências nos dados. O estudo de \citeonline{queiroga2020learning} oferece uma análise detalhada sobre a identificação precoce de estudantes em risco de evasão em um curso técnico a distância no Brasil, utilizando uma abordagem analítica de aprendizado. Este estudo difere-se deste principalmente na metodologia empregada para análise dos dados, o artigo se debruça sobre a utilização de um algoritmo genético elitista para a afinação de hiperparâmetros, visando maximizar os resultados das previsões.
+
+Ambos os estudos compartilham o objetivo comum de utilizar análise de dados para identificar estudantes em risco de evasão escolar. Contudo, as técnicas específicas e os contextos de aplicação diferem, o estudo de \citeonline{queiroga2020learning} foca em um curso técnico a distância específico, utilizando contagens de interações dos alunos com o ambiente virtual de aprendizagem como base para a previsão. A contribuição do artigo dos autores para o campo é notável na aplicação de algoritmos genéticos para a afinação de hiperparâmetros, uma abordagem inovadora que pode oferecer conhecimentos sobre a otimização de modelos preditivos em contextos educacionais. Isso complementa o presente trabalho ao demonstrar a eficácia de diferentes métodos analíticos e abordagens no domínio da análise educacional, enriquecendo assim a compreensão geral das estratégias possíveis para lidar com o problema da evasão escolar.
+
+Já no artigo de \citeonline{Lee2019}, é apresentado um sistema de alerta precoce para evasão escolar baseado em aprendizado de máquina, visando melhorar a previsão de evasão escolar. Este estudo, realizado na Coréia do Sul, utiliza técnicas como Oversampling Sintético de Minoria (SMOTE) e métodos de ensemble para abordar o desequilíbrio de classes no conjunto de dados. Eles treinaram modelos como Random Forest e Árvores de Decisão Impulsionadas (Boosted Decision Trees) com e sem SMOTE, usando uma grande amostra de dados de estudantes do Sistema Nacional de Informações Educacionais (NEIS). O estudo revelou que a Árvore de Decisão Impulsionada apresentou o melhor desempenho, com base na análise das curvas ROC e PR. O artigo enfatiza a importância de lidar com o desequilíbrio de classes em modelos preditivos e destaca o uso de curvas PR como uma métrica de avaliação eficaz em conjuntos de dados desequilibrados.
+
+Comparando com o presente trabalho, tanto o trabalho de \citeonline{Lee2019} quanto o de \citeonline{queiroga2020learning} os artigos abordam a questão da evasão escolar usando técnicas de aprendizado de máquina, mas com diferenças notáveis. Enquanto o artigo de \citeonline{Lee2019} foca em um sistema de alerta precoce utilizando uma grande base de dados nacional e abordagens específicas para lidar com o desequilíbrio de classes, este trabalho concentra-se na identificação de fatores de risco de evasão escolar no contexto educacional brasileiro, empregando uma abordagem mais diversificada de técnicas de aprendizado de máquina.
+
+Já em relação ao estudo realizado no artigo de \citeonline{niyogisubizo2022predicting} onde também aborda o problema global do abandono escolar, ressaltando sua relevância não apenas para o indivíduo, mas para a sociedade como um todo. O artigo propõe um modelo inovador de \textit{ensemble stacking}, combinando Random Forest (RF), Extreme Gradient Boosting (XGBoost), Gradient Boosting (GB) e Feed-forward Neural Networks (FNN) para prever o abandono de estudantes em classes universitárias. Este modelo demonstrou um desempenho superior em relação aos modelos base, utilizando métricas de precisão de teste e área sob a curva (AUC) sob as mesmas condições. O modelo proposto no artigo se destaca por ser um dos primeiros a explorar o \textit{ensemble stacking} entre RF, XGBoost, GB e FNN para previsão de abandono escolar em classes universitárias.
+
+O artigo apresenta uma abordagem de validação cruzada durante o treinamento do modelo para evitar o overfitting. Os dados de entrada foram divididos aleatoriamente em conjuntos de treinamento e teste, com porcentagens de 80\% e 20\%, respectivamente, e aplicou-se validação cruzada de dez vezes. Os resultados experimentais do modelo proposto foram comparados com os modelos base no primeiro layer, mostrando que o modelo de \textit{ensemble stacking} obteve desempenho superior em precisão de treinamento, variando de 86,67\% a 96,67\%, e precisão de teste, variando de 76,67\% a 92,18\%.
+
+O modelo de \textit{ensemble stacking} atingiu resultados de recall de 0,93 e precisão de 0,93 nos testes, indicando que o modelo pode prever corretamente cerca de 93\% dos casos de abandono escolar. Além disso, alcançou um F1-Score geral de 0,92, demonstrando um desempenho de previsão eficiente para abandono escolar em classes universitárias. Este resultado é reforçado pelos resultados da AUC e pelas curvas ROC correspondentes para FNN, RF, GB, XGBoost e o \textit{ensemble stacking}, com o último alcançando uma pontuação AUC de 0,983, indicando uma classificação aceitável e superior à adivinhação aleatória. Em comparação com o presente trabalho, que foca na evasão escolar no contexto do sistema educacional brasileiro, utilizando algoritmos classificatórios e análises estatísticas, esse artigo fornece uma abordagem complementar, empregando um modelo híbrido de \textit{ensemble stacking} com técnicas avançadas de machine learning para prever o abandono escolar em um contexto universitário. O artigo traz uma nova perspectiva com o uso de um conjunto diversificado de algoritmos de machine learning em um contexto mais global.
+
+
+\begin{table}[ht!]
+\centering
+\caption{Comparação entre os estudos de evasão escolar}
+\label{tab:comparacao_estudos}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Critério} &
+  \textbf{Contexto do Estudo} &
+  \textbf{Métodos Utilizados} &
+  \textbf{Abordagem de Análise} &
+  \textbf{Principais Resultados} \\ \hline
+\textbf{\citeonline{queiroga2020learning}} &
+  Curso técnico a distância &
+  Algoritmo genético &
+  Análise de interações &
+  Otimização de hiperparâmetros \\ \hline
+\textbf{\citeonline{Lee2019}} &
+  Universidade na Coreia do Sul &
+  \textit{Ensemble stacking} &
+  Análise baseada em big data &
+  Previsão de abandono escolar \\ \hline
+\textbf{\citeonline{niyogisubizo2022predicting}} &
+  Universidade em Nitra &
+  \textit{Ensemble stacking} &
+  Validação cruzada &
+  Alta precisão de previsão \\ \hline
+\textbf{Presente trabalho} &
+  Sistema educacional brasileiro &
+  \begin{tabular}[c]{@{}l@{}}Random Forest, Decision Tree,\\ Naive Bayes, AdaBoost, KNN\end{tabular} &
+  Análise classificatória &
+  Identificação de fatores de risco \\ \hline
+\end{tabular}%
+}
+\fonte{\me{2023}}
+\end{table}
+
+O primeiro artigo de \citeonline{queiroga2020learning}, focado em um curso técnico a distância no Brasil, utiliza um algoritmo genético para a afinação de hiperparâmetros, destacando-se por sua abordagem direcionada ao aprimoramento de modelos preditivos em um ambiente educacional específico. Este estudo realça a importância de ajustar minuciosamente os modelos de machine learning para refletir com precisão as peculiaridades e necessidades específicas de um contexto educacional particular. Já o segundo artigo de \citeonline{Lee2019}, originário de uma universidade em Nitra, propõe um modelo similar de \textit{ensemble stacking}, mas se distingue pelo uso de validação cruzada para evitar o overfitting, garantindo que o modelo seja robusto e confiável. Este estudo ressalta a importância de metodologias rigorosas no treinamento de modelos de machine learning, especialmente em contextos onde os dados podem ser limitados ou desbalanceados. Por fim, o terceiro artigo de \citeonline{niyogisubizo2022predicting}, apresenta um modelo de \textit{ensemble stacking}, combinando várias técnicas avançadas de machine learning, como Random Forest, Extreme Gradient Boosting, Gradient Boosting e Feed-forward Neural Networks. Esta pesquisa é pioneira no uso dessa abordagem de ensemble para prever a evasão escolar em classes universitárias, demonstrando a eficácia de combinar diferentes métodos para melhorar a precisão das previsões. Ao comparar estes três estudos, é evidente que, embora cada um adote uma abordagem única, todos reconhecem a complexidade da evasão escolar e a necessidade de técnicas sofisticadas de análise de dados para abordá-la efetivamente.
+
+Tendo conhecimento dos trabalhos relacionados, analisaremos no capítulo seguinte o contexto da pesquisa realizada, bem como entrar em detalhamento sobre a base de dados fornecida.
+
+
+
+
+
+
+
+
+
+
+% O trabalho de Lee e Chung contribui significativamente para o campo de previsão de evasão escolar ao demonstrar a eficácia de técnicas específicas em um conjunto de dados desequilibrado e ao destacar a importância das curvas PR na avaliação de modelos em tais contextos. Este artigo serve como um importante ponto de referência para o trabalho de conclusão de curso, oferecendo percepções sobre o tratamento de desequilíbrios de classe e a eficácia de diferentes técnicas de aprendizado de máquina, que podem ser aplicáveis ao contexto brasileiro.
+
+
+

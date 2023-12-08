@@ -1,0 +1,386 @@
+\chapter{Arquitetura do sistema}
+
+A arquitetura do sistema foi disponibilizada pelo NEES. As atuais tabelas são unidas de duas partes diferentes do sistema: a parte de cadastramento de instituições, alunos e professores, unida à como essas tabelas se relacionam com os  A seguir, são apresentadas algumas das principais tabelas do sistema:
+
+Tabela de Instituição (Tabela \ref{tab:instituicao}): Esta tabela contém informações sobre as instituições de ensino, incluindo um código de identificação único e o nome da instituição.
+
+Tabela de Aluno (Tabela \ref{tab:aluno}): Contém informações sobre os alunos, como código de identificação, nome, data de nascimento e a instituição à qual estão vinculados.  Por mais que na arquitetura oficial outros dados são considerados (por exemplo, etnia, orientação sexual, identidade de gênero, etc.), como os atuais dados foram gerados de forma aleatória, essas informações não foram consideradas para que não fosse passado qualquer juízo de valor.
+
+Tabela de Professor (Tabela \ref{tab:professor}): Esta tabela armazena dados sobre os professores, como código de identificação, nome e a instituição à qual estão associados. De igual forma à Tabela \ref{tab:aluno}, outros dados cadastrais serão utilizados no sistema final, mas não  
+
+Tabela de Série/Ano (Tabela \ref{tab:serie_ano}): Esta tabela descreve as séries e anos de ensino, associando-as a uma etapa de ensino e fornecendo um código de identificação único.
+
+Tabela de Turno (Tabela \ref{tab:turno}): Armazena informações sobre os turnos de funcionamento das turmas, incluindo um código de identificação e o nome do turno.
+
+Tabela de Disciplina (Tabela \ref{tab:disciplina}): Esta tabela contém informações sobre as disciplinas, como código de identificação e nome da disciplina.
+
+Tabela de Turma (Tabela \ref{tab:turma}): Registra informações sobre as turmas, como código de identificação, nome da turma, série/ano, turno, professor responsável e outras informações relevantes.
+
+Tabela de Horário da Turma (Tabela \ref{tab:horario_turma}): Armazena informações sobre os horários de aula das turmas, incluindo o dia da semana, hora de início e término.
+
+Tabela de Aluno-Turma (Tabela \ref{tab:aluno_turma}): Registra a associação de alunos a turmas e indica se o aluno está ativo na turma.
+
+Tabela de Histórico de Versões da Turma (Tabela \ref{tab:historico_versoes}): Mantém um histórico das versões das turmas, registrando o número da versão, a data da versão e os códigos dos alunos associados.
+
+Tabela de Feriado (Tabela \ref{tab:feriado}): Contém informações sobre feriados, incluindo o código de identificação, nome, data, âmbito do feriado (nacional, estadual ou municipal) e outras informações. As seguintes observações são notadas:
+
+\begin{itemize}
+    \item Feriados com data fixa são cadastrados com ano 0001 para serem reutilizados ano a ano. ex: Confraternização Universal ‘0001-01-01’, Natal ‘0001-12-25’
+
+    \item Feriados com data variável, com Páscoa, Cinzas, Corpus Christi devem ser cadastrados anualmente
+
+    \item Se feriado municipal, cadastrar apenas o código do município e não do estado, pois quando selecionar feriados pelo estado, retornar apenas os feriados estaduais e não os feriados de municípios daquele estado
+
+    \item Data do feriado remarcado é necessária para quando há uma remarcação do feriado para algum dia da semana
+
+    \item A data default é a data utilizada quando não há remarcação
+\end{itemize}
+
+Tabela de Registro de Aula (Tabela \ref{tab:reg_aula}): Registra informações sobre o registro de aulas, incluindo o código da turma, código da versão da turma e data da aula.
+
+Tabela de Justificativas (Tabela \ref{tab:justificativas}): Contém informações sobre as justificativas para a ausência de alunos, incluindo um código de identificação, um ID de justificativa e o nome da justificativa.
+
+Tabela de Sub Justificativa (Tabela \ref{tab:sub_justificativa}): Registra subjustificativas relacionadas a uma justificativa principal, incluindo um código de identificação, um ID de subjustificativa e o nome da subjustificativa.
+
+
+
+Tabela de Frequência-Aluno (Tabela \ref{tab:freq_aluno}): Mantém registros de frequência dos alunos, incluindo informações sobre a turma, aluno, data da frequência, horário da turma, status de presença e subjustificativa, se aplicável.
+
+% INSTITUICAO
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|l|l|l|}
+        \hline
+        \textbf{Atributo} &
+          \multicolumn{1}{c|}{\textbf{Coluna}} &
+          \multicolumn{1}{c|}{\textbf{Tipo}} &
+          \multicolumn{1}{c|}{\textbf{Rest}} &
+          \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+        Código da instituição &
+          co\_instituicao &
+          INTEGER &
+          *, PK &
+           \\ \hline
+        Nome da instituição &
+          no\_instituicao &
+          VARCHAR(100) &
+          * &
+           \\ \hline
+    \end{tabular}%
+    }
+    \caption{Tabela variáveis Instituição}
+    \label{tab:instituicao}
+\end{table}
+
+% ALUNO
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|l|l|l|}
+        \hline
+        \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+        Código do aluno       & co\_aluno       & INTEGER      & *, PK &  \\ \hline
+        Nome do aluno         & no\_aluno       & VARCHAR(150) & *     &  \\ \hline
+        Data de nascimento    & dt\_nascimento  & DATE         & *     &  \\ \hline
+        Código da instituição & co\_instituicao & INTEGER      & *, FK &  \\ \hline
+    \end{tabular}%
+    }
+    \caption{Tabela variáveis Aluno}
+    \label{tab:aluno}
+\end{table}
+
+
+% PROFESSOR
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|l|l|l|}
+        \hline
+        \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+        Código do professor   & co\_professor   & INTEGER      & *, PK &  \\ \hline
+        Nome do professor     & no\_professor   & VARCHAR(150) & *     &  \\ \hline
+        Código da instituição & co\_instituicao & INTEGER      & *, FK &  \\ \hline
+        \end{tabular}%
+    }
+    \caption{Tabela variáveis Professor}
+    \label{tab:professor}
+\end{table}
+
+% SERIE/ANO
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+    \begin{tabular}[width=\textwidth]{|c|c|c|c|c|}
+        \hline
+        \textbf{Atributo} & \textbf{Coluna} & \textbf{Tipo} & \textbf{Rest} & \textbf{Domínio}\\ \hline
+        Código da série & co\_serie\_ano & INTEGER       & *, PK         &
+        \begin{tabular}[c]
+            {@{}l@{}}\\\textbf{Ensino Infantil}\\ \\     1. Berçário, 2. Creche, \\3. Pré-escola\\ \\ \textbf{Ensino Fundamental}\\ \\     4. 1º ano, 5. 2º ano,\\ 6. 3º ano,     7. 4º ano, \\8. 5º ano,  9. 6º ano,  \\   10. 7º ano, 11. 8º ano,\\ 12. 9º ano,\\ \\ \textbf{Ensino Médio}\\ \\     13. 1ª série, 14. 2ª série,\\15. 3ª série,\\ \\ \textbf{Ensino Médio Técnico} \\     16. 1º ano, 17. 2º ano,\\18. 3º ano, 19. 4º ano
+        \end{tabular} \\
+        \hline
+        Nome da série & no\_serie\_ano & VARCHAR(100)  & &\\ \hline
+        Código da Etapa de ensino & co\_etapa\_modalidade\_ensino & INTEGER & *, FK &\\
+        \hline
+    \end{tabular}
+    }
+    \caption{Tabela variáveis: Série/Ano}
+    \label{tab:serie_ano}
+\end{table}
+
+% TURNO
+\begin{table}[ht]
+    \centering
+    \resizebox{0.7\textwidth}{!}{%
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \textbf{Atributo} & \textbf{Coluna} & \textbf{Tipo} & \textbf{Rest} & \textbf{Domínio} \\
+            \hline
+            Código do turno   & co\_turno       & INTEGER       & *, PK         & \begin{tabular}[c]{@{}l@{}}1. Matutino\\ 2. Vespertino\\ 3. Noturno\\ 4. Integral\end{tabular} \\
+            \hline
+            Nome do turno     & no\_turno       & VARCHAR(100)  & *             &\\
+            \hline
+        \end{tabular}%
+    }
+    \caption{Tabela variáveis: Turno}
+    \label{tab:turno}
+\end{table}
+
+% DISCIPLINA
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \textbf{Atributo}    & \textbf{Coluna} & \textbf{Tipo} & \textbf{Rest} & \textbf{Domínio}                      \\ \hline
+            Código da disciplina & co\_disciplina  & INTEGER       & *, PK         &                                       \\ \hline
+            Nome da disciplina   & no\_disciplina  & VARCHAR(100)  & *             & Base Nacional Comum Curricular (BNCC) \\ \hline
+        \end{tabular}%
+    }
+    \caption{Tabela variáveis: Disciplina}
+    \label{tab:disciplina}
+\end{table}
+
+% TURMA
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|c|l|l|l|l|}
+            \hline
+            \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+            Código da turma                   & \multicolumn{1}{c|}{co\_disciplina} & BIGSERIAL   & *, PK &  \\ \hline
+            Nome da turma                     & no\_turma                           & VARCHAR(30) & *     &  \\ \hline
+            Serie/Ano                         & co\_serie                           & INTEGER     & *, FK &  \\ \hline
+            Turno                             & co\_turno                           & INTEGER     & *, FK &  \\ \hline
+            Código do professor responsável   & co\_professor                       & INTEGER     & *, FK &  \\ \hline
+            Código da instituição             & co\_instituicao                     & INTEGER     & *, FK &  \\ \hline
+            Data de início da oferta da turma & dt\_inicio\_turma                   & TIME        & *     &  \\ \hline
+            Data de término                   & dt\_termino\_turma                  & TIME        & *     &  \\ \hline
+            Local                             & ds\_local                           & VARCHAR(50) &       &  \\ \hline
+            Ano letivo de oferta da turma     & nu\_ano\_letivo                     & INTEGER     & *     &  \\ \hline
+            Disciplina                        & co\_disciplina                      & INTEGER     & *, FK &  \\ \hline
+            Turma está ativa?                 & st\_ativa                           & BOOLEAN     & *     &  \\ \hline
+        \end{tabular}%
+    }
+    \caption{Tabela variáveis Turma}
+    \label{tab:turma}
+\end{table}
+
+% HORARIO TURMA
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|c|l|l|l|l|}
+            \hline
+            \textbf{Atributo} &
+              \multicolumn{1}{c|}{\textbf{Coluna}} &
+              \multicolumn{1}{c|}{\textbf{Tipo}} &
+              \multicolumn{1}{c|}{\textbf{Rest}} &
+              \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+            Código do horário de aula da turma &
+              \multicolumn{1}{c|}{co\_horario\_aula\_turma} &
+              BIGSERIAL &
+              *, PK &
+               \\ \hline
+            Código da turma & co\_turma       & BIGINT  & *      &  \\ \hline
+            Dia da semana   & nu\_dia\_semana & INTEGER & *      &  \\ \hline
+            Hora de início  & ho\_inicio      & TIME    & *      &  \\ \hline
+            Hora de término & ho\_termino     & TIME    & *      &  \\ \hline
+        \end{tabular}%
+    }
+    \caption{Tabela variáveis Horário da Turma}
+    \label{tab:horario_turma}
+\end{table}
+
+% ALUNO-TURMA
+\begin{table}[ht]
+    \centering
+    \resizebox{0.9\textwidth}{!}{%
+        \begin{tabular}{|c|l|l|l|l|}
+            \hline
+            \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+            Código do aluno-turma      & \multicolumn{1}{c|}{co\_aluno\_turma} & BIGSERIAL & *, PK &  \\ \hline
+            Código do aluno            & co\_aluno                             & BIGINT    & *     &  \\ \hline
+            Código da turma            & co\_turma                             & BIGINT    & *     &  \\ \hline
+            Aluno está ativo na turma? & st\_aluno                             & BOOLEAN   & *     &  \\ \hline
+        \end{tabular}%
+        }
+    \caption{Tabela variáveis Aluno-Turma}
+    \label{tab:aluno_turma}
+\end{table}
+
+% HISTORICO VERSOES
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+        \begin{tabular}{|c|l|l|l|l|}
+            \hline
+            \textbf{Atributo} &
+              \multicolumn{1}{c|}{\textbf{Coluna}} &
+              \multicolumn{1}{c|}{\textbf{Tipo}} &
+              \multicolumn{1}{c|}{\textbf{Rest}} &
+              \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+            Código da versão da turma &
+              \multicolumn{1}{c|}{co\_historico\_versao\_turma} &
+              BIGSERIAL &
+              *, PK &
+               \\ \hline
+            Código da turma             & co\_turma         & BIGINT        & *, FK &  \\ \hline
+            Número da versão turma      & nu\_versao\_turma & INT           & *     &  \\ \hline
+            Data da versão da turma     & dt\_versao\_turma & DATE          & *     &  \\ \hline
+            Lista de códigos dos alunos & co\_alunos\_turma & BIGINT{[} {]} & *     &  \\ \hline
+        \end{tabular}%
+    }
+    \caption{Tabela variáveis Histórico de Versões da Turma}
+    \label{tab:historico_versoes}
+\end{table}
+
+% FERIADO
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|l|l|l|}
+        \hline
+        \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+        Código do feriado &
+          co\_feriado &
+          BIGSERIAL &
+          *, PK &
+           \\ \hline
+        Nome do feriado &
+          no\_feriado &
+          VARCHAR(100) &
+          * &
+           \\ \hline
+        Data do feriado &
+          dt\_feriado &
+          DATE &
+          * &
+           \\ \hline
+        Âmbito do feriado &
+          tp\_ambito\_feriado &
+          INTEGER &
+          * &
+          \begin{tabular}[c]{@{}l@{}}1 - Nacional\\ 2 - Estadual\\ 3 - Municipal\end{tabular} \\ \hline
+        Código do município &
+          co\_municipio &
+          INTEGER &
+          FK &
+           \\ \hline
+        Código da unidade federativa &
+          co\_uf &
+          INTEGER &
+          FK &
+           \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Feriado é remarcação de\\ outro já existente?\end{tabular} &
+          tp\_remarcado &
+          BOOLEAN &
+          * &
+           \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Código do feriado correspondente\\ em caso de remarcação\end{tabular} &
+          co\_feriado\_original &
+          BIGINT &
+           &
+           \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Descrição do decreto que\\ estabeleceu a mudança\end{tabular} &
+          ds\_decreto\_mudança &
+          VARCHAR(100) &
+           &
+           \\ \hline
+    \end{tabular}%
+    }
+    \caption{Tabela variáveis Feriado}
+    \label{tab:feriado}
+\end{table}
+
+% REGISTRO DE AULA
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|l|l|l|}
+        \hline
+        \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Código do\\ registro de aula\end{tabular}
+          & co\_registro\_aula & BIGSERIAL  & *, PK &  \\ \hline
+        Código da turma            & co\_turma          & BIGINTEGER & *, FK &  \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Código da\\ versão da turma\end{tabular}   & co\_versao\_turma  & BIGINTEGER & *, FK &  \\ \hline
+        Data da aula               & dt\_aula           & DATE       & *     &  \\ \hline
+    \end{tabular}%
+    }
+    \caption{Tabela variáveis Registro de Aula}
+    \label{tab:reg_aula}
+\end{table}
+
+% JUSTIFICATIVA
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|l|l|l|}
+        \hline
+        \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+        Código da justificativa & co\_justificativa & INTEGER      & *, PK &  \\ \hline
+        Id da justificativa     & id\_justificativa & VARCHAR(3)   & * & Lista de IDs \\ \hline
+        Nome da justificativa   & no\_justificativa & VARCHAR(350) & * & Lista de Nomes \\ \hline
+    \end{tabular}%
+    }
+    \caption{Tabela variáveis Justificativas}
+    \label{tab:justificativas}
+\end{table}
+
+% SUBJUSTIFICATIVA
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|l|l|l|}
+        \hline
+        \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Código da\\ subjustificativa\end{tabular} & co\_sub\_justificativa & INTEGER      & *, PK &  \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Id da\\  subjustificativa\end{tabular}     & id\_sub\_justificativa & VARCHAR(3)   & *     & Lista de IDs \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Nome da\\  subjustificativa\end{tabular}   & no\_sub\_justificativa & VARCHAR(350) & *     & Lista de Nomes \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Código da\\  justificativa\end{tabular}     & co\_justificativa      & INTEGER      & *, FK & Lista de IDs de justificativas \\ \hline
+    \end{tabular}%
+    }
+    \caption{Tabela variáveis Sub Justificativa}
+    \label{tab:sub_justificativa}
+\end{table}
+
+% FREQUENCIA-ALUNO
+\begin{table}[ht]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|l|l|l|}
+        \hline
+        \textbf{Atributo} & \multicolumn{1}{c|}{\textbf{Coluna}} & \multicolumn{1}{c|}{\textbf{Tipo}} & \multicolumn{1}{c|}{\textbf{Rest}} & \multicolumn{1}{c|}{\textbf{Domínio}} \\ \hline
+        Código da frequência                                                   & co\_frequencia\_aluno  & BIGSERIAL & *, PK &  \\ \hline
+        Código da turma                                                        & co\_turma              & BIGINT    & *, FK &  \\ \hline
+        Código do aluno                                                        & co\_aluno              & BIGINT    & *, FK &  \\ \hline
+        Data da frequencia                                                     & dt\_frequencia         & DATE      & *     &  \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Código do horário\\ da turma\end{tabular}   & co\_horario\_turma     & BIGINT    & *, FK &  \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Código do status\\ de presença\end{tabular} & co\_status\_presenca   & INTEGER   & *, FK &  \\ \hline
+        \begin{tabular}[c]{@{}c@{}}Código da\\ de subjustificativa\end{tabular}                                              & co\_sub\_justificativa & INTEGER   & FK    &  \\ \hline
+    \end{tabular}%
+    }
+    \caption{Tabela variáveis Frequência-Aluno}
+    \label{tab:freq_aluno}
+\end{table}
+

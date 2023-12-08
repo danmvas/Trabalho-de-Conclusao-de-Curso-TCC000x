@@ -1,0 +1,130 @@
+ \chapter{Proposta}
+
+O objetivo do presente trabalho de conclusão de curso é investigar os padrões de características dos estudantes do ensino básico, abrangendo a pré-escola, o ensino fundamental e o ensino médio, com base na sua presença em sala de aula. Especificamente, busca-se coletar informações dos estudantes, como notas, gênero, idades e registros de presenças em sala de aula, a fim de identificar possíveis correlações com a evasão escolar.
+
+O projeto coordenado pelo NEES tem como objetivo desenvolver um software de coleta de dados voltado para dispositivos móveis de baixo custo. Esse software será utilizado para coletar dados dos alunos e armazená-los em um data lake, que será modelado durante o processo de desenvolvimento do software. O objetivo do NEES é garantir uma experiência de uso pouco intrusiva e flexível para garantir adesão na educação básica, considerando a diversidade das redes em suas diferentes modalidades, como a educação do campo, quilombola e educação especial, além das diferentes etapas de ensino. O software planejado permitirá que as escolas e instituições de ensino possam identificar problemas e desenvolver soluções para melhorar a qualidade da educação, e também pode ser utilizado para prevenir a evasão escolar, por meio de um sistema de alerta preventivo.
+
+É importante reforçar que ainda não foram disponibilizados pelo NEES os dados referentes à frequência individual dos estudantes, pois será realizado um teste piloto do \textit{software} no segundo semestre de 2023. Porém, o NEES disponibilizou outros dados de bases diversas que ajudarão a formar um panorama mais complexo e robusto da situação do ensino básico brasileiro. Entre essas bases, há dados do censo escolar do INEP, Sistema Universal de Saúde (SUS), Instituto Brasileiro de Geografia e Estatística (IBGE), etc. Os dados disponibilizados envolvem, mas não estão limitados a:
+
+\begin{enumerate}
+    \item Estimativa da população por idade por município entre 2014 a 2021;
+    \item Projeção da população por idade de 2010 a 2060, realizada em 2018, por estado;
+    \item Quantidade de matriculados no ensino básico por municípios entre 2014 a 2021;
+    \item Quantidade de matriculados no ensino básico por idade e cor e raça;
+    \item Quantidade de turmas no ensino básico nos anos iniciais e nos anos finais;
+    \item Base dos indicativos de cada estado e município com relação às metas um, dois, três e seis do programa PNE Em Movimento\footnote{https://pne.mec.gov.br/assistencia-tecnica/programas-do-mec-metas}. As metas referentes são:
+    \begin{enumerate}
+        \item Meta 1: Universalizar, até 2016, a educação infantil na pré-escola para as crianças de 4 a 5 anos de idade e ampliar a oferta de educação infantil em creches de forma a atender, no mínimo, 50\% das crianças de até 3 anos;
+        \item Meta 2: Universalizar o ensino fundamental de 9 anos para toda a população de 6 a 14 anos e garantir que pelo menos 95\% dos alunos concluam essa etapa na idade recomendada;
+        \item Meta 3: Universalizar, até 2016, o atendimento escolar para toda a população de 15 a 17 anos e elevar, até o final do período de vigência deste PNE, a taxa líquida de matrículas no ensino médio para 85\%;
+        \item Meta 6: as escolas públicas, de forma a atender, pelo menos, 25\% dos (as) alunos (as) da educação básica.
+    \end{enumerate}
+    \item Microdados do Sistema Nacional de Avaliação da Educação Básica (SAEB) dos anos de 2015, 2017 e 2019, que avaliam informações de questionários aplicados a alunos, professores, diretores e Secretários Municipais de Educação de cada escola em cada município;
+    \item Tipo de localização da escola (urbana ou rural);
+    \item Microdados do censo escolar de 2021 realizado pelo INEP (qualidade do acesso a internet, tipo de localização da escola, disponibilidade de bibliotecas, dentre outros);%, que incluem variáveis relevantes como:
+    % \begin{itemize}
+    %     \item CO\_MUNICIPIO: Código do município onde a escola está localizada.
+    %     \item QT\_TUR\_EJA: Quantidade de turmas de Educação de Jovens e Adultos.
+    %     \item QT\_MAT\_PROF\_TEC: Quantidade de matrículas em cursos profissionalizantes técnicos.
+    %     \item QT\_MAT\_EJA: Quantidade de matrículas na Educação de Jovens e Adultos.
+    %     \item IN\_ESPACO\_ATIVIDADE: Indicador de disponibilidade de espaços para atividades extracurriculares.
+    %     \item IN\_ESPACO\_EQUIPAMENTO: Indicador de disponibilidade de equipamentos nas escolas.
+    %     \item IN\_MATERIAL\_PED\_DESPORTIVA: Indicador de disponibilidade de material pedagógico esportivo.
+    %     \item IN\_INTERNET\_APRENDIZAGEM: Indicador de acesso à internet para fins de aprendizagem.
+    %     \item IN\_INTERNET\_COMUNIDADE: Indicador de acesso à internet pela comunidade local.
+    %     \item TP\_REDE\_LOCAL: Tipo de rede de ensino local.
+    %     \item IN\_BANDA\_LARGA: Indicador de disponibilidade de banda larga.
+    %     \item IN\_INTERNET: Indicador de acesso à internet.
+    %     \item IN\_BIBLIOTECA: Indicador de disponibilidade de biblioteca.
+    %     \item QT\_MAT\_BAS\_ND: Quantidade de matrículas na Educação Básica (Não Duradoura).
+    %     \item QT\_MAT\_BAS\_BRANCA: Quantidade de matrículas na Educação Básica (Cor/Raça Branca).
+    %     \item QT\_MAT\_BAS\_PRETA: Quantidade de matrículas na Educação Básica (Cor/Raça Preta).
+    %     \item QT\_MAT\_BAS\_PARDA: Quantidade de matrículas na Educação Básica (Cor/Raça Parda).
+    %     \item QT\_MAT\_BAS\_AMARELA: Quantidade de matrículas na Educação Básica (Cor/Raça Amarela).
+    %     \item QT\_MAT\_BAS\_INDIGENA: Quantidade de matrículas na Educação Básica (Cor/Raça Indígena).
+    %     \item QT\_MAT\_BAS\_FEM: Quantidade de matrículas na Educação Básica (Sexo Feminino).
+    %     \item QT\_MAT\_BAS\_MASC: Quantidade de matrículas na Educação Básica (Sexo Masculino).
+    %     \item QT\_MAT\_BAS\_4\_5: Quantidade de matrículas na Educação Básica (Faixa Etária 4-5 anos).
+    %     \item QT\_MAT\_INF\_PRE\_INT: Quantidade de matrículas na Educação Infantil (Pré-escola Integral).
+    %     \item QT\_MAT\_BAS\_0\_3: Quantidade de matrículas na Educação Básica (Faixa Etária 0-3 anos).
+    %     \item QT\_MAT\_INF\_CRE\_INT: Quantidade de matrículas na Educação Infantil (Creche Integral).
+    %     \item QT\_MAT\_FUND: Quantidade de matrículas no Ensino Fundamental.
+    %     \item QT\_MAT\_FUND\_AI: Quantidade de matrículas no Ensino Fundamental (Anos Iniciais).
+    %     \item QT\_MAT\_FUND\_INT: Quantidade de matrículas no Ensino Fundamental (Integral).
+    %     \item QT\_MAT\_FUND\_AI\_INT: Quantidade de matrículas no Ensino Fundamental (Anos Iniciais Integral).
+    %     \item QT\_TUR\_FUND: Quantidade de turmas no Ensino Fundamental.
+    %     \item QT\_TUR\_FUND\_AI: Quantidade de turmas no Ensino Fundamental (Anos Iniciais).
+    %     \item QT\_TUR\_FUND\_AF: Quantidade de turmas no Ensino Fundamental (Anos Finais).
+    %     \item QT\_MAT\_FUND\_AF\_INT: Quantidade de matrículas no Ensino Fundamental (Anos Finais Integral).
+    %     \item QT\_MAT\_FUND\_AF: Quantidade de matrículas no Ensino Fundamental (Anos Finais).
+    %     \item IN\_ACESSO\_INTERNET\_COMPUTADOR: Indicador de acesso à internet via computador.
+    %     \item IN\_ACES\_INTERNET\_DISP\_PESSOAIS: Indicador de acesso à internet por meio de dispositivos pessoais.
+    %     \item QT\_DOC\_INF: Quantidade de docentes na Educação Infantil.
+    %     \item QT\_DOC\_INF\_PRE: Quantidade de docentes na Educação Infantil (Pré-escola).
+    %     \item QT\_DOC\_INF\_CRE: Quantidade de docentes na Educação Infantil (Creche).
+    %     \item QT\_DOC\_FUND: Quantidade de docentes no Ensino Fundamental.
+    %     \item QT\_DOC\_FUND\_AI: Quantidade de docentes no Ensino Fundamental (Anos Iniciais).
+    %     \item QT\_DOC\_FUND\_AF: Quantidade de docentes no Ensino Fundamental (Anos Finais).
+    %     \item TP\_DEPENDENCIA\_ESTADUAL: Tipo de dependência administrativa estadual da escola.
+    %     \item TP\_DEPENDENCIA\_FEDERAL: Tipo de dependência administrativa federal da escola.
+    %     \item TP\_DEPENDENCIA\_MUNICIPAL: Tipo de dependência administrativa municipal da escola.
+    %     \item TP\_DEPENDENCIA\_PRIVADA: Tipo de dependência administrativa privada da escola.
+    %     \item TP\_LOCALIZACAO\_RURAL: Tipo de localização da escola (rural).
+    %     \item TP\_LOCALIZACAO\_URBANA: Tipo de localização da escola (urbana).
+    % \end{itemize}
+\end{enumerate}
+
+Considerando essas variáveis e levando em consideração que as técnicas de reconhecimento de padrões serão aplicadas após a obtenção dos dados de frequência escolar, propõe-se neste trabalho uma análise da relação entre a quantidade de turmas, o número de matrículas e o quão cada escola da educação básica atingiu os  por município no período de 2014 a 2021. Para esta análise serão considerados estes e outros dados, como a a variação da população dos municípios e estados, a faixa etária dos estudantes e a autodeclaração étnico-racial dos estudantes, bem como e as respostas dos questionários da SAEB. Essa análise de abordagem multidimensional permitirá traçar um panorama das condições das escolas no Brasil e examinar como houve melhorias ao longo dos últimos anos, ou identificar oportunidades para futuras melhorias. Essas informações serão essenciais para personalizar ainda mais a aplicação futura do software desenvolvido pelo NEES, de modo a atender de forma mais precisa às necessidades dos estudantes em diferentes ambientes educacionais, bem como obter uma compreensão mais abrangente do panorama educacional brasileiro, identificando tendências e padrões que possam direcionar políticas e ações educacionais para o aprimoramento contínuo das escolas e do sistema educacional como um todo.
+
+%Tendo em perspectiva os dados acima analisados e sabendo que as técnicas de reconhecimento de padrões serão aplicadas após o recebimento dos dados de frequência, propõe-se para este trabalho uma análise da relação da mudança de tamanho da população de municípios e estados com o quão os índices da educação básica estão sendo atendidos nos anos de 2014 a 2021. Tendo em mente outros dados como a quantidade de turmas, idade e cor e raça dos estudantes e a quantidade de matrículas, bem como as respostas dos questionários da SAEB, será possível traçar um panorama sobre as condições de escolas no Brasil e como as escolas melhoraram nos últimos anos ou podem melhorar nos anos seguintes, tornando a aplicação futura do \textit{software} do NEES ainda mais personalizada para estudantes inseridos em de determinados ambientes educacionais.}
+
+
+\section{Conclusão}
+
+Para alcançar o objetivo proposto, serão investigados os dados educacionais dos estudantes do ensino básico, contemplando informações como notas obtidas nas disciplinas, gênero, idades e registros de frequências em sala de aula. Esses dados serão analisados por meio de técnicas de mineração de dados e análise estatística, visando identificar padrões e relações que possam contribuir para a compreensão da evasão escolar. A participação desse trabalho no contexto do projeto celebrado entre o NEES e o MEC pelo TED 11476 proporcionará acesso a uma ampla gama de recursos e conhecimentos, além de uma colaboração interinstitucional que enriquecerá o desenvolvimento deste trabalho. A parceria entre o NEES-UFAL, UDESC e UFAM permitirá a utilização de metodologias e ferramentas avançadas, promovendo uma análise abrangente e rigorosa dos dados coletados.
+
+Os resultados esperados deste estudo serão a identificação de padrões e características dos estudantes do ensino básico que possam estar correlacionados com a evasão escolar. Essas descobertas poderão contribuir para a formulação de políticas educacionais mais efetivas e intervenções direcionadas para prevenir e combater a evasão escolar, promovendo uma educação mais inclusiva e de qualidade.
+
+Os itens definidos sobre a metodologia de condução da pesquisa do trabalho de conclusão de curso foram os seguintes:
+
+\begin{enumerate}
+	\item \label{item:presenca} Estudar sistemas atuais de checagem de frequência de estudantes em sala de aula;
+    \item \label{item:algoritmos} Estudar diferentes algoritmos de reconhecimento de padrões para grandes bases de dados;
+    \item \label{item:trabrelac} Fazer levantamento de trabalhos relacionados sobre detecção de presença estudantil em sala de aula;
+    \item \label{item:base} Estudar as bases de dados dos estudantes do ensino básico disponibilizadas pelo NEES;
+    \item \label{item:definir} Definir algoritmo(s) de reconhecimento de padrões que seja(m) mais apropriado(s) para as bases de dados disponibilizadas pelo NEES;
+    \item \label{item:algoritmo} Aplicar algoritmo(s) de reconhecimento de padrões;
+    \item \label{item:graficos} Gerar visualizações;
+    \item \label{item:analise} Analisar os resultados;
+	\item \label{item:escrita} Escrever o trabalho de conclusão de curso.
+	\end{enumerate}
+
+  A pesquisa até esse momento concluiu as etapas \ref{item:presenca}, \ref{item:algoritmos} e \ref{item:trabrelac}. Sendo assim, o planejamento de tempo das outras etapas é mostrado na Tabela \ref{tabela}.
+
+  \begin{table}[ht!]
+      \centering
+      \resizebox{0.38\columnwidth}{!}{%
+          \begin{tabular}{|c|c|c|c|c|c|}
+        	\hline
+        	\multirow{2}{*}{\textbf{\small{Etapas}}} &
+        	\multicolumn{5}{|c|}{\textbf{\small{2023/2}}} \\
+        	\cline{2-6}
+        	& \textbf{Ago} &  \textbf{Set} & \textbf{Out} & \textbf{Nov} & \textbf{Dez} \\
+        	\hline
+        	\textbf{\small{\ref{item:base}}} & \cellcolor{gray}  &  \cellcolor{gray} &  \cellcolor{gray} &\cellcolor{gray} &  \\
+        	\hline
+            \textbf{\small{\ref{item:definir}}} & \cellcolor{gray}  &  \cellcolor{gray} &   & &  \\
+        	\hline
+        	\textbf{\small{\ref{item:algoritmo}}}  &  & \cellcolor{gray} & \cellcolor{gray} \cellcolor{gray}& & \\
+        	\hline
+        	\textbf{\small{\ref{item:graficos}}} & \cellcolor{gray}  & \cellcolor{gray} & \cellcolor{gray} \cellcolor{gray} & \cellcolor{gray} &  \\
+        	\hline
+            \textbf{\small{\ref{item:analise}}}  & \cellcolor{gray}  & \cellcolor{gray} & \cellcolor{gray} \cellcolor{gray} & \cellcolor{gray} &  \\
+        	\hline
+        	\textbf{\small{\ref{item:escrita}}}  & \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} \cellcolor{gray} & \cellcolor{gray} & \cellcolor{gray} \\
+        	\hline
+    	   \end{tabular}
+        }
+      \caption{Planejamento de tarefas para o TCC 2}
+      \label{tabela}
+  \end{table}
